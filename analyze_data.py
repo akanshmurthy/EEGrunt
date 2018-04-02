@@ -10,16 +10,16 @@ import EEGrunt
 # 'openbci-openvibe' for Cyton data recorded with OpenViBE's csv writer
 # 'openbci-ganglion-openvibe' for Ganglion data recorded with OpenViBE's csv writer
 
-source = 'openbci'
+source = 'muse'
 
 # Path to EEG data file
 path = 'data/'
 
 # EEG data file name
-filename = 'eegrunt-obci-ovibe-test-data.csv'
+filename = 'test-muse.csv'
 
 # Session title (used in plots and such)
-session_title = "OpenBCI EEGrunt Test Data"
+session_title = "EEGrunt Test Muse Data"
 
 # Initialize
 EEG = EEGrunt.EEGrunt(path, filename, source, session_title)

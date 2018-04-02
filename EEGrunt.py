@@ -65,42 +65,49 @@ class EEGrunt:
             print 'EEG data file not found.'
             exit()
 
-        if source == 'muse':
-            skiprows = 0
-            raw_data = []
-            with open(path + filename, 'rb') as csvfile:
-                for row in csvfile:
-                    cols = row.split(',')
-                    if(cols[1].strip() == "/muse/eeg"):
-                        raw_data.append(cols[2:6])
+        # if source == 'muse':
+        #     skiprows = 0
+        #     raw_data = []
+        #     with open(path + filename, 'rb') as csvfile:
+        #         for row in csvfile:
+        #             cols = row.split(',')
+        #             if(cols[1].strip() == "/muse/eeg"):
+        #                 raw_data.append(cols[2:6])
+        # 
+        #     dt = np.dtype('Float64')
+        #     raw_data = np.array(raw_data, dtype=dt)
+        # 
+        # else:
+        # 
+        #     if source == 'openbci' or source == 'openbci-openvibe':
+        #         skiprows = 5
+        #         cols = (0,1,2,3,4,5,6,7,8)
+        # 
+        #     if source == 'openbci-ganglion' or source =='openbci-ganglion-openvibe':
+        #         skiprows = 6
+        #         cols = (0,1,2,3,4)
+        # 
+        #     if source == 'openbci-openvibe' or source == 'openbci-ganglion-openvibe':
+        #         skiprows = 1
+        # 
+        #     if source == 'muse-lsl':
+        #         skiprows = 1
+        #         cols = (0,1,2,3,4)
+        # 
+        #     raw_data = np.loadtxt(path + filename,
+        #                   delimiter=',',
+        #                   skiprows=skiprows,
+        #                   usecols=cols
+        #                   )
 
-            dt = np.dtype('Float64')
-            raw_data = np.array(raw_data, dtype=dt)
+        skiprows = 1
+        cols = (0,1,2,3,4)
 
-        else:
-
-            if source == 'openbci' or source == 'openbci-openvibe':
-                skiprows = 5
-                cols = (0,1,2,3,4,5,6,7,8)
-
-            if source == 'openbci-ganglion' or source =='openbci-ganglion-openvibe':
-                skiprows = 6
-                cols = (0,1,2,3,4)
-
-            if source == 'openbci-openvibe' or source == 'openbci-ganglion-openvibe':
-                skiprows = 1
-
-            if source == 'muse-lsl':
-                skiprows = 1
-                cols = (0,1,2,3,4)
-
-            raw_data = np.loadtxt(path + filename,
-                          delimiter=',',
-                          skiprows=skiprows,
-                          usecols=cols
-                          )
-
-
+        raw_data = np.loadtxt(path + filename,
+                      delimiter=',',
+                      skiprows=skiprows,
+                      usecols=cols
+                      )
         self.raw_data = raw_data
 
         self.t_sec = np.arange(len(self.raw_data[:, 0])) /self.fs_Hz
